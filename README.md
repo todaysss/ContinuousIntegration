@@ -1,0 +1,1 @@
+# ninja-osm-roles

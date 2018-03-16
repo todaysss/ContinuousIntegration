@@ -1,0 +1,5 @@
+---
+# defaults file for incron
+incron_enabled: true
+incron_system_tables_dir: "/etc/incron.d/"
+incron_system_tables: []

@@ -1,0 +1,5 @@
+---
+# vars file for incron
+incron_user: "root"
+incron_daemon: incron
+incron_daemond: incrond

@@ -1,0 +1,30 @@
+---
+- name: Check that the /etc/incron.allow file exists
+  stat:
+    path: /etc/incron.allow
+  register: stat_result
+
+- name: Create the file, if it doesnt exist already
+  file:
+    path: /etc/incron.allow
+    state: touch
+  when: stat_result.stat.exists == False
+
+- lineinfile:
+    dest: /etc/incron.allow
+    line: "{{ incron_user }}"
+
+- name: Setup incron.d scripts
+  template:
+    src: incrontab.j2
+    dest: "{{ incron_system_tables_dir }}{{ item.name }}"
+  with_items: "{{ incron_system_tables }}"
+  when: incron_system_tables is defined
+
+- name: Restarting incron
+  service: name=incron state=restarted
+  when: ansible_os_family == "Debian"
+
+- name: Restarting incron
+  service: name=incrond state=restarted
+  when: ansible_os_family == "RedHat"

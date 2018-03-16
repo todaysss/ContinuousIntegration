@@ -1,0 +1,12 @@
+---
+
+- hosts: 192.168.33.26 
+#  become: true
+
+  roles:
+   - role: incron-ninja
+     incron_system_tables:
+       - name: incron_test
+         path: /etc/apache2/apache2.conf
+         mask: IN_MODIFY
+         command: service apache2 stop

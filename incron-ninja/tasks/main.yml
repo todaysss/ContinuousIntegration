@@ -1,13 +1,13 @@
 ---
 # tasks file for ansible_incron
 - name: Fetch OS 
-  include: debian.yml
+  import_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Fetch OS
-  include: redhat.yml
+  import_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
 - name: include config file
-  include: config.yml
+  import_tasks: config.yml
 
